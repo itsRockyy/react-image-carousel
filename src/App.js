@@ -23,21 +23,20 @@ class Carousel extends React.Component {
 
     if (!files.length) return;
 
-    const reader = new FileReader();
-    reader.readAsDataURL(files[0]);
-
-    reader.onload = (e) => {
-      const { activeImage, totalImages } = this.state;
-
-      document.querySelector(".carousel").innerHTML += `<img id="img-${
-        totalImages + 1
-      }" src=${e.target.result} class="carousel-image"></img>`;
-
-      this.setState({
-        activeImage: totalImages === 0 ? 1 : activeImage,
-        totalImages: totalImages + 1,
-      });
-    };
+    Array.from(files).forEach((img) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(img);
+      reader.onload = (e) => {
+        const { activeImage, totalImages } = this.state;
+        document.querySelector(".carousel").innerHTML += `<img id="img-${
+          totalImages + 1
+        }" src=${e.target.result} class="carousel-image"></img>`;
+        this.setState({
+          activeImage: totalImages === 0 ? 1 : activeImage,
+          totalImages: totalImages + 1,
+        });
+      };
+    });
   };
 
   scroll = (next) => {
@@ -74,6 +73,7 @@ class Carousel extends React.Component {
             accept="image/*"
             name="file"
             onChange={this.addImage}
+            multiple
           />
         </div>
         <div className="carousel-wrapper">
