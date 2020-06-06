@@ -69,8 +69,12 @@ class Carousel extends React.Component {
     return (
       <div className="App">
         <div className="image-upload-area">
-          <input type="file" name="file" onChange={this.addImage} />
-          <div className="loaded-images"></div>
+          <input
+            type="file"
+            accept="image/*"
+            name="file"
+            onChange={this.addImage}
+          />
         </div>
         <div className="carousel-wrapper">
           {totalImages > 1 && activeImage !== 1 && (
