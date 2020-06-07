@@ -5,9 +5,16 @@ class Carousel extends React.Component {
   state = {
     activeImage: 0,
     totalImages: 0,
-    isPreviousEnabled: false,
-    isNextEnabled: false,
   };
+
+  componentDidMount() {
+    document.addEventListener("keyup", (event) => {
+      const modal = document.querySelector(".modal");
+      if (event.keyCode === 27 && modal.style.display !== "none") {
+        modal.style.display = "none";
+      }
+    });
+  }
 
   addImage = (event) => {
     const {
@@ -29,14 +36,12 @@ class Carousel extends React.Component {
       this.setState({
         activeImage: totalImages === 0 ? 1 : activeImage,
         totalImages: totalImages + 1,
-        isPreviousEnabled: true,
-        isNextEnabled: true,
       });
     };
   };
 
   scroll = (next) => {
-    const { activeImage, totalImages } = this.state;
+    const { activeImage } = this.state;
     const moveToImage = next ? activeImage + 1 : activeImage - 1;
 
     document
@@ -45,13 +50,21 @@ class Carousel extends React.Component {
 
     this.setState({
       activeImage: moveToImage,
-      isNextEnabled: moveToImage !== totalImages ? true : false,
-      isPreviousEnabled: moveToImage > 1 ? true : false,
     });
   };
 
+  enlargeImage = (event) => {
+    const modal = document.querySelector(".modal");
+    modal.childNodes[0].src = event.target.src;
+    modal.style.display = "flex";
+  };
+
+  hideModal = () => {
+    document.querySelector(".modal").style.display = "none";
+  };
+
   render() {
-    const { isPreviousEnabled, isNextEnabled, activeImage } = this.state;
+    const { activeImage, totalImages } = this.state;
 
     return (
       <div className="App">
@@ -60,17 +73,21 @@ class Carousel extends React.Component {
           <div className="loaded-images"></div>
         </div>
         <div className="carousel-wrapper">
-          {isPreviousEnabled && activeImage !== 1 && (
+          {totalImages > 1 && activeImage !== 1 && (
             <div className="prev control" onClick={() => this.scroll(false)}>
               &lt;
             </div>
           )}
-          <div className="carousel"></div>
-          {isNextEnabled && (
+          <div className="carousel" onClick={this.enlargeImage}></div>
+          {activeImage < totalImages && totalImages > 1 && (
             <div className="next control" onClick={() => this.scroll(true)}>
               &gt;
             </div>
           )}
+        </div>
+        <div className="modal">
+          <img src="" alt="" />
+          <button onClick={this.hideModal}>X</button>
         </div>
       </div>
     );
