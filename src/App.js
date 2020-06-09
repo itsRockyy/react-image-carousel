@@ -3,8 +3,10 @@ import "./App.css";
 
 class Carousel extends React.Component {
   state = {
-    activeImage: null,
+    activeImage: 0,
     totalImages: 0,
+    isPreviousEnabled: false,
+    isNextEnabled: false,
   };
 
   addImage = (event) => {
@@ -18,16 +20,39 @@ class Carousel extends React.Component {
     reader.readAsDataURL(files[0]);
 
     reader.onload = (e) => {
-      document.querySelector(
-        ".carousel"
-      ).innerHTML += `<img id="${this.state.totalImages}-img" src=${e.target.result} class="carousel-image"></img>`;
+      const { activeImage, totalImages } = this.state;
+
+      document.querySelector(".carousel").innerHTML += `<img id="img-${
+        totalImages + 1
+      }" src=${e.target.result} class="carousel-image"></img>`;
+
       this.setState({
-        totalImages: this.state.totalImages + 1,
+        activeImage: totalImages === 0 ? 1 : activeImage,
+        totalImages: totalImages + 1,
+        isPreviousEnabled: true,
+        isNextEnabled: true,
       });
     };
   };
 
+  scroll = (next) => {
+    const { activeImage, totalImages } = this.state;
+    const moveToImage = next ? activeImage + 1 : activeImage - 1;
+
+    document
+      .getElementById(`img-${moveToImage}`)
+      .scrollIntoView({ behavior: "smooth" });
+
+    this.setState({
+      activeImage: moveToImage,
+      isNextEnabled: moveToImage !== totalImages ? true : false,
+      isPreviousEnabled: moveToImage > 1 ? true : false,
+    });
+  };
+
   render() {
+    const { isPreviousEnabled, isNextEnabled, activeImage } = this.state;
+
     return (
       <div className="App">
         <div className="image-upload-area">
@@ -35,10 +60,17 @@ class Carousel extends React.Component {
           <div className="loaded-images"></div>
         </div>
         <div className="carousel-wrapper">
-          <div className="carousel">
-            <div className="prev control">&lt;</div>
-            <div className="next control">&gt;</div>
-          </div>
+          {isPreviousEnabled && activeImage !== 1 && (
+            <div className="prev control" onClick={() => this.scroll(false)}>
+              &lt;
+            </div>
+          )}
+          <div className="carousel"></div>
+          {isNextEnabled && (
+            <div className="next control" onClick={() => this.scroll(true)}>
+              &gt;
+            </div>
+          )}
         </div>
       </div>
     );
@@ -46,5 +78,3 @@ class Carousel extends React.Component {
 }
 
 export default Carousel;
-
-// document.getElementById('i4').scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
