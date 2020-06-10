@@ -34,7 +34,12 @@ class Carousel extends React.Component {
           <input type="file" name="file" onChange={this.addImage} />
           <div className="loaded-images"></div>
         </div>
-        <div className="carousel"></div>
+        <div className="carousel-wrapper">
+          <div className="carousel">
+            <div className="prev control">&lt;</div>
+            <div className="next control">&gt;</div>
+          </div>
+        </div>
       </div>
     );
   }
