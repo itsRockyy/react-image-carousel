@@ -12,6 +12,8 @@
   scroll-snap-type: x mandatory;
 }
 
-.carousel img {
+.carousel-image {
   scroll-snap-align: start;
+  width: 200px;
+  height: 200px;
 }
