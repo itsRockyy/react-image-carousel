@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import Carousel from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Carousel />
   </React.StrictMode>,
   document.getElementById("root")
 );

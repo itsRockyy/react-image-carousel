@@ -1,5 +1,7 @@
 # react-image-carousel
 
+<img src="logo.png" alt="Image Carousel">
+
 Simple React Image Carousel
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
