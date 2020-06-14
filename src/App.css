@@ -6,11 +6,13 @@
 
 .carousel-wrapper {
   width: 300px;
+  border: solid 1px red;
   position: relative;
 }
+
 .carousel {
   display: flex;
-  overflow-x: scroll;
+  overflow-x: hidden;
   scroll-snap-type: x mandatory;
 }
 
@@ -36,6 +38,7 @@
   font-weight: 900;
   transition: all 250ms linear;
   cursor: pointer;
+  z-index: 1;
 }
 
 .next {
@@ -48,6 +51,5 @@
 }
 
 .control.disabled {
-  pointer-events: none;
-  background: rgba(255, 255, 255, 0.1);
+  display: none;
 }
