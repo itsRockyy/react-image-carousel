@@ -10,8 +10,14 @@ class Carousel extends React.Component {
   componentDidMount() {
     document.addEventListener("keyup", (event) => {
       const modal = document.querySelector(".modal");
+      const { activeImage, totalImages } = this.state;
+
       if (event.keyCode === 27 && modal.style.display !== "none") {
         modal.style.display = "none";
+      } else if (event.keyCode === 37 && totalImages > 1 && activeImage !== 1) {
+        this.scroll(false);
+      } else if (event.keyCode === 39 && activeImage < totalImages) {
+        this.scroll(true);
       }
     });
   }
