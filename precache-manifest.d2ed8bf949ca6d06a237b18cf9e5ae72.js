@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "39b077ef8c13a0cdaaf99149112e8e41",
+    "revision": "6d624e77564e79412380a2294ce1630c",
     "url": "/react-image-carousel/index.html"
   },
   {
-    "revision": "e473b403b9847f9e8c06",
-    "url": "/react-image-carousel/static/css/main.69d869fc.chunk.css"
+    "revision": "228bfa70235c80197f6a",
+    "url": "/react-image-carousel/static/css/main.4509212f.chunk.css"
   },
   {
     "revision": "5f1d00f0fe215b665a1e",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-image-carousel/static/js/2.940c6e94.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e473b403b9847f9e8c06",
-    "url": "/react-image-carousel/static/js/main.6d987f40.chunk.js"
+    "revision": "228bfa70235c80197f6a",
+    "url": "/react-image-carousel/static/js/main.f2d414c5.chunk.js"
   },
   {
     "revision": "bf99a4b3afe43b01a43a",
